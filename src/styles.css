@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+/* ul>li .active{
+    background: #3f4c5d !important;
+} */
+ul>li .active {
+    color: #fff !important;
+    background: #1e282c !important;
+    border-left-color: #605ca8 !important;
+}
