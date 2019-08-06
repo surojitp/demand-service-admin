@@ -1,0 +1,362 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h5 class="box-title">Agent Management</h5>
+                        
+                    </div>
+                    
+                    <div class="search-box">
+                        
+                        <!-- <div class="btn-group" style="float: right;"></div> -->
+                            <input id="searchinput" placeholder="Search" [(ngModel)]="searchTerm" type="search" class="form-control">
+                            <span id="searchclear" class="glyphicon" (click) = 'searchTerm=""'>
+                                <i class="fa fa-times"></i>
+                            </span>
+                        <!-- </div>                       -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered  table-condensed table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Driving Licence</th>
+                                        <th>Realestate Licence</th>
+                                        <th>Company</th>
+                                        <th>Block Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of data">
+                                        <td>{{item.fullName}}</td>
+                                        <td>{{item.email}}</td>
+                                        <td>{{item.phone}}</td>
+                                        <td>{{item.driverLicence}}</td>
+                                        <td>{{item.realEstateLicense}}</td>
+                                        <td>{{item.companyName}}</td>
+                                        <!-- <td><span style="cursor: pointer;" data-status="" (click)="statusChange(item)"
+                                            class="btn-smbadge badge  {{item.blockStatus == 'no' ? 'bg-green' : 'bg-red'}}">
+                                            {{item.blockStatus== 'no' ? 'NO' : 'YES'}}</span>
+                                        </td> -->
+                                        <td>
+                                            <div class="btn-group" [class.voted]="flipped">
+                                                <button type="button" [className]="item.blockStatus == 'no' ? 'btn btn-success' : 'btn btn-danger'" (click)="changeStatus(item)">
+                                                    {{item.blockStatus == 'no' ? 'Unblock' : 'Block'}}
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" id="modalprintedit" (click)="getDetails(item)"
+                                                data-toggle="modal" data-target="#modal-form" title="Edit">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+
+            <div class="col-xs-12">
+                <!-- pager -->
+                <div class="pagination-center">
+                    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                            <a (click)="setPage(1)">First</a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                        </li>
+                        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                            <a (click)="setPage(page)">{{page}}</a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                            <a (click)="setPage(pager.totalPages)">Last</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<div class="modal fade" id="modal-form">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">{{pagetitle}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="item.fullName"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="text" class="form-control" readonly id="" [(ngModel)]="item.email"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Phone</label>
+                            <input type="text" class="form-control" readonly id="" [(ngModel)]="item.phone"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Is Admin</label>
+                            <select class="form-control" [(ngModel)]="item.blockStatus">
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Driving Licence</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="item.driverLicence"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Realestate Licence</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="item.realEstateLicense"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Company Name</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="item.companyName"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Experience</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="item.experience"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Hobbies</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="item.hobbies"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Achievments</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="item.achievments"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Certifications</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="item.certifications"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="close-button-model" data-dismiss="modal">Close</button>
+                <button type="button" (click)="saveData()" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- <div class="modal fade" id="modal-form">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">{{pagetitle}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.fullName" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.email" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Phone</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.phone" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Driving Licence</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.driverLicence" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Realestate Licence</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.realEstateLicense" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Company Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.companyName" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Experience</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.experience" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Hobbies</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.hobbies" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Achievments</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.achievments" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="" class="col-sm-2 col-form-label">Certifications</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="" [(ngModel)]="item.certifications" />
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+    
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="close-button-model" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> -->

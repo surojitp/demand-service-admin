@@ -65,3 +65,8 @@
 .btn.search-btn{margin-right: 0!important;}
 .pagination-center{display:flex; align-item:center; justify-content: center;}
 .pagination-center .pagination{margin: 8px 0;}
+.voted {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+.content-wrapper{height:100vh;}

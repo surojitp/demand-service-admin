@@ -15,7 +15,7 @@
                     <div class="search-box">
                         
                         <!-- <div class="btn-group" style="float: right;"></div> -->
-                            <input id="searchinput" [(ngModel)]="searchTerm" type="search" class="form-control">
+                            <input id="searchinput" placeholder="Search" [(ngModel)]="searchTerm" type="search" class="form-control">
                             <span id="searchclear" class="glyphicon" (click) = 'searchTerm=""'>
                                 <i class="fa fa-times"></i>
                             </span>
@@ -44,10 +44,16 @@
                                             {{item.blockStatus== 'no' ? 'NO' : 'YES'}}</span>
                                         </td> -->
                                         <td>
-                                            <button type="button" class="btn btn-primary" id="modalprintedit" (click)="getDetails(item)"
+                                            <!-- <button type="button" class="btn btn-primary" id="modalprintedit" (click)="getDetails(item)"
                                                 data-toggle="modal" data-target="#modal-form" title="Edit">
                                                 <i class="fa fa-edit"></i>
-                                            </button>
+                                            </button> -->
+                                            <div class="btn-group" [class.voted]="flipped">
+                                                <button type="button" [className]="item.blockStatus == 'no' ? 'btn btn-success' : 'btn btn-danger'" (click)="changeStatus(item)">
+                                                    {{item.blockStatus == 'no' ? 'Unblock' : 'Block'}}
+                                                </button>
+                                                
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../userservice/user.service';
 import { MessageService } from '../userservice/message.services';
@@ -6,13 +7,11 @@ import { Http} from '@angular/http';
 
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'user',
-    styleUrls: ['./user.component.css'],
-    templateUrl: './user.component.html'
+  selector: 'app-agent',
+  templateUrl: './agent.component.html',
+  styleUrls: ['./agent.component.css']
 })
-// class Select
-export class UserComponent implements OnInit {
+export class AgentComponent implements OnInit {
     edit: boolean;
     data: any;
     admintoken: any;
@@ -57,7 +56,7 @@ export class UserComponent implements OnInit {
     }
     getData(data, onLoad: any) {
         // tslint:disable-next-line:no-shadowed-variable
-        this._appservice.getAllUser(data).subscribe((Response) => {
+        this._appservice.getAllProvider(data).subscribe((Response) => {
             if (Response.STATUSCODE === 4002) {
                 this._message.showError(Response.message);
                 localStorage.clear();
@@ -106,19 +105,29 @@ export class UserComponent implements OnInit {
     }
     saveData() {
         let flag = 0, errorMessage;
-        if (! this.item.firstName) {
+        if (! this.item.fullName) {
             errorMessage = 'Please enter name';
             flag = 1;
             this._message.showError(errorMessage);
             return false;
-        } else if (! this.item.email) {
-          errorMessage = 'Please enter email';
+        } else if (! this.item.driverLicence) {
+          errorMessage = 'Please enter Driving Licence';
+          flag = 1;
+          this._message.showError(errorMessage);
+          return false;
+        } else if (! this.item.realEstateLicense) {
+          errorMessage = 'Please enter Realestate Licence';
+          flag = 1;
+          this._message.showError(errorMessage);
+          return false;
+        } else if (! this.item.companyName) {
+          errorMessage = 'Please enter Company Name';
           flag = 1;
           this._message.showError(errorMessage);
           return false;
         } else {
             document.getElementById('overlay').style.display = 'block';
-            this._appservice.editUser(this.item)
+            this._appservice.editProvider(this.item)
                 // tslint:disable-next-line:no-shadowed-variable
                 .subscribe((Response: any) => {
                     if (Response.STATUSCODE === 4002) {
@@ -141,33 +150,12 @@ export class UserComponent implements OnInit {
         }
     }
     changeStatus(str) {
-
         this.item = str;
         this.item.blockStatus = this.item.blockStatus === 'no' ? 'yes' : this.item.blockStatus === 'yes' ? 'no' : '';
-
-        // document.getElementById('overlay').style.display = 'block';
-        this._appservice.editUser(this.item )
-            // tslint:disable-next-line:no-shadowed-variable
-            .subscribe((Response: any) => {
-                if (Response.STATUSCODE === 4002) {
-                    this._message.showError(Response.response_message);
-                    localStorage.clear();
-                    location.reload();
-                } else {
-                    if (Response.success) {
-                        this._message.showSuccess(Response.message);
-                        // this.popupDiv = false;
-                        document.getElementById('close-button-model').click() ;
-                        document.getElementById('overlay').style.display = 'none';
-                    } else {
-                        this._message.showWarning(Response.message);
-                    }
-                }
-            }, (Error) => {
-                this._message.showError(Error.message);
-            });
+        this.saveData();
     }
     clear() {
         this.ngOnInit();
     }
 }
+

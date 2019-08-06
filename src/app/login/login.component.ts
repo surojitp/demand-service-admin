@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         private _router: Router     ) {
     }
     ngOnInit(): void {
+        document.getElementById('overlay').style.display = 'none';
         const tokenchk = localStorage.getItem('admintoken');
         if (tokenchk != null) {
             this._router.navigate(['/dashboard']);

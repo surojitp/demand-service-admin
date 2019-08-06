@@ -26,6 +26,8 @@ import { AuthGuard } from './guards/index';
 
 // import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { AgentComponent } from './agent/agent.component';
+import { BookingComponent } from './booking/booking.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
@@ -37,6 +39,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     DashboardComponent,
     UserComponent,
     LoginComponent,
+    AgentComponent,
+    BookingComponent,
   ],
   imports: [
     BrowserModule, ToastrModule.forRoot(),

@@ -44,138 +44,43 @@ export class UserService {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     this.authHeader(headers);
     const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'editUser';
+    const URL = CONFIG.API_ENDPOINT_ON + 'editUser';
     return this._http.post(URL, data, options)
       .map((response: Response) => response.json())
       .catch(this._errorHandler);
   }
-  // All User Settings
-  listUserSettings(data) {
+  // All Agent list
+  getAllProvider(data) {
     // console.log("dddddddddd",data);
     const headers = new Headers({ 'Content-Type': 'application/json' });
     this.authHeader(headers);
     const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'listUserSettings';
+    const URL = CONFIG.API_ENDPOINT_ON + 'listProvider';
+    return this._http.post(URL, data, options)
+      .map((response: Response) => response.json())
+      .catch(this._errorHandler);
+  }
+  // Edit Agent
+  editProvider(data: any) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    this.authHeader(headers);
+    const options = new RequestOptions({ headers: headers });
+    const URL = CONFIG.API_ENDPOINT_ON + 'editProvider';
+    return this._http.post(URL, data, options)
+      .map((response: Response) => response.json())
+      .catch(this._errorHandler);
+  }
+  // All Booking list
+  listBooking(data) {
+    // console.log("dddddddddd",data);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    this.authHeader(headers);
+    const options = new RequestOptions({ headers: headers });
+    const URL = CONFIG.API_ENDPOINT_ON + 'listBooking';
     return this._http.post(URL, data, options)
       .map((response: Response) => response.json())
       .catch(this._errorHandler);
   }
 
-  // All AllergeanAlias list
-  listAllergeanAlias(data) {
-    // console.log("dddddddddd",data);
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'listAllergeanAlias';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // Add edit AllergenAlias
-  addEditAllergenAlias(data: any) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'addEditAllergenAlias';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-
-  // csv file file upload
-  csvUpload( updateFile) {
-    const formData: FormData = new FormData();
-    formData.append('csv', updateFile);
-    const headers = new Headers({ 'Accept': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'csvUploadAllergenAlias';
-    return this._http.post(URL, formData, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // csv file to json and insert
-  csvDataReadAndInsertAllergenAlias(data: any) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'csvDataReadAndInsertAllergenAlias';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // All Food Item list
-  listFoodItems(data) {
-    // console.log("dddddddddd",data);
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'listFoodItems';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // Add edit AllergenAlias
-  addEditlistFoodItems(data: any) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'addEditlistFoodItems';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // csv file to json and insert list food items
-  csvDataReadAndInsertListFoodItems(data: any) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'csvDataReadAndInsertListFoodItems';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // All product
-  listAllProducts(data) {
-    // console.log("dddddddddd",data);
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'listAllProducts';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // Add edit product
-  addEditProduct(data: any) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'addEditProduct';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // get and edit terms
-  getEditTerms(data?: any) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'teams';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
-  // get and edit privacy
-  getEditPrivacy(data?: any) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    this.authHeader(headers);
-    const options = new RequestOptions({ headers: headers });
-    const URL = CONFIG.API_ENDPOINT_AL + 'privacy';
-    return this._http.post(URL, data, options)
-      .map((response: Response) => response.json())
-      .catch(this._errorHandler);
-  }
 }
 
