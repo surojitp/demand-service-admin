@@ -81,6 +81,40 @@ export class UserService {
       .map((response: Response) => response.json())
       .catch(this._errorHandler);
   }
+  // COMPLETE SERVICE
+  completeService(data) {
+    // console.log("dddddddddd",data);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    this.authHeader(headers);
+    const options = new RequestOptions({ headers: headers });
+    const URL = CONFIG.API_ENDPOINT_ON + 'completeService';
+    return this._http.post(URL, data, options)
+      .map((response: Response) => response.json())
+      .catch(this._errorHandler);
+  }
+  // Get Service Radius
+  getRadius(data) {
+    // console.log("dddddddddd",data);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    this.authHeader(headers);
+    const options = new RequestOptions({ headers: headers });
+    const URL = CONFIG.API_ENDPOINT_ON + 'getRadius';
+    return this._http.post(URL, data, options)
+      .map((response: Response) => response.json())
+      .catch(this._errorHandler);
+  }
+  // Update Service Radius
+  updateRadius(data) {
+    // console.log("dddddddddd",data);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    this.authHeader(headers);
+    const options = new RequestOptions({ headers: headers });
+    const URL = CONFIG.API_ENDPOINT_ON + 'updateRadius';
+    return this._http.post(URL, data, options)
+      .map((response: Response) => response.json())
+      .catch(this._errorHandler);
+  }
+
 
 }
 

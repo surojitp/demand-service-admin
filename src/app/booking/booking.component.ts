@@ -107,9 +107,37 @@ export class BookingComponent implements OnInit {
         this.pagetitle = 'View Details';
         this.item = str;
     }
+    completeStatusChange(str){
+        console.log(str);
+        if(str.requestStatus == 'CANCEL'){
+            this._message.showWarning("This service already canceled")
+        }else{
+            //if(str.completeStatus == 'PENDING' && confirm('Are you sure?')){
+            if(str.completeStatus == 'PENDING' && confirm('Are you sure?')){
+                this._appservice.completeService(str).subscribe((Response) => {
+                    if (Response.STATUSCODE === 4002) {
+                        this._message.showError(Response.message);
+                        localStorage.clear();
+                        location.reload();
+                    } else {
+                        if (Response.success) {
+                            str.completeStatus = 'COMPLETE'
+                            document.getElementById('overlay').style.display = 'none';
+                        } else {
+                            this._message.showWarning(Response.message);
+                        }
+                    }
+                },
+                (Error) => {
+                });
+            }
+        }
+        
+    }
     clear() {
         this.ngOnInit();
     }
+
 }
 
 

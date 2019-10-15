@@ -28,6 +28,7 @@ import { AuthGuard } from './guards/index';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { AgentComponent } from './agent/agent.component';
 import { BookingComponent } from './booking/booking.component';
+import { SettingsComponent } from './settings/settings.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
@@ -41,6 +42,7 @@ import { BookingComponent } from './booking/booking.component';
     LoginComponent,
     AgentComponent,
     BookingComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule, ToastrModule.forRoot(),

@@ -43,11 +43,11 @@
                                       <td>{{item.user.fullName}}</td>
                                       <td>{{item.provider.fullName}}</td>
                                       <td>{{item.requestStatus}}</td>
-                                      <td>{{item.completeStatus}}</td>
-                                      <!-- <td><span style="cursor: pointer;" data-status="" (click)="statusChange(item)"
-                                          class="btn-smbadge badge  {{item.blockStatus == 'no' ? 'bg-green' : 'bg-red'}}">
-                                          {{item.blockStatus== 'no' ? 'NO' : 'YES'}}</span>
-                                      </td> -->
+                                      <!-- <td>{{item.completeStatus}}</td> -->
+                                      <td><span style="cursor: pointer;" data-status="" (click)="completeStatusChange(item)"
+                                          class="btn-smbadge badge  {{item.completeStatus== 'PENDING' ? 'bg-yellow' : 'bg-green'}}">
+                                          {{item.completeStatus== 'PENDING' ? 'NO' : 'YES'}}</span>
+                                      </td>
                                       <!-- <td>
                                           <div class="btn-group" [class.voted]="flipped">
                                               <button type="button" [className]="item.blockStatus == 'no' ? 'btn btn-success' : 'btn btn-danger'" (click)="changeStatus(item)">
